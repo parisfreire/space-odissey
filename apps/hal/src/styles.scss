@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* You can add global styles to this file, and also import other style files */
+@layer components {
+  .icon {
+    @apply relative mx-auto mt-2 mb-2 flex h-12 w-12 items-center justify-center
+    rounded-3xl transition-all
+    duration-300 ease-linear
+    hover:rounded-xl hover:bg-amber-200 hover:text-white;
+  }
+}

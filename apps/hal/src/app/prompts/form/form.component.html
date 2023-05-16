@@ -1,0 +1,37 @@
+<section class="flex h-full min-h-[200px] w-full flex-col rounded-lg bg-white p-4 shadow">
+<!--  check max height-->
+  <div #conversation class="border-grey-800 h-full overflow-y-auto border-b-2">
+    <p *ngFor="let prompt of prompts"
+       [ngClass]="{
+         'text-right': prompt.type === 'HUMAN',
+         'text-left' : prompt.type === 'MACHINE'
+         }"
+       class='my-2'
+    >
+      {{ prompt.text }}
+    </p>
+  </div>
+  <div class="flex h-16 items-center mt-4">
+    <form class='w-full' #form="ngForm" (submit)='onSubmit(form.value)'>
+      <div
+        class="relative flex w-full items-center justify-end px-4 sm:px-6 lg:px-8"
+      >
+        <input
+          placeholder="Enter prompt"
+          name="text"
+          type="text"
+          ngModel
+          class="w-full rounded-xl border border-gray-400 p-4
+          focus-visible:border-none focus-visible:outline-gray-800"
+        />
+        <button type="submit" class="absolute">
+          <img
+            src="/assets/robot.svg"
+            class="mr-4 w-10 hover:rounded-2xl hover:bg-gray-100"
+            alt="Search Icon"
+          />
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

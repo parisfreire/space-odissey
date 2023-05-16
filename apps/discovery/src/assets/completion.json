@@ -1,0 +1,46 @@
+{
+  "status": 200,
+  "statusText": "OK",
+  "headers": {
+    "openai-model": "text-ada-001",
+    "openai-organization": "user-ID"
+  },
+  "config": {
+    "headers": {
+      "Accept": "application/json, text/plain, */*",
+      "Content-Type": "application/json",
+      "User-Agent": "OpenAI/NodeJS/3.2.1",
+      "Authorization": "Bearer OPENAI_API_KEY",
+      "Content-Length": 138
+    },
+    "method": "post",
+    "data": {
+      "model": "text-ada-001",
+      "prompt": "ANY PROMPT GIVEN",
+      "temperature": 0.7,
+      "max_tokens": 256,
+      "frequency_penalty": 0,
+      "presence_penalty": 0
+    },
+    "url": "https://api.openai.com/v1/completions"
+  },
+  "data": {
+    "id": "cmpl-ID",
+    "object": "text_completion",
+    "created": 1683532775,
+    "model": "text-ada-001",
+    "choices": [
+      {
+        "text": "\n\nHi, my name is Mickel and I'm a mouse.",
+        "index": 0,
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 6,
+      "completion_tokens":14,
+      "total_tokens":20
+    }
+  }
+}
