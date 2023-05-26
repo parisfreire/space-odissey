@@ -7,7 +7,6 @@
     "build": {
       "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
       "options": {
         "target": "node",
         "compiler": "tsc",
@@ -21,7 +20,8 @@
       "configurations": {
         "development": {},
         "production": {}
-      }
+      },
+      "defaultConfiguration": "development"
     },
     "serve": {
       "executor": "@nrwl/js:node",
@@ -58,6 +58,10 @@
           "codeCoverage": true
         }
       }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f discovery.Dockerfile . -t discovery"
     }
   },
   "tags": []

@@ -8,8 +8,7 @@
     "affected:e2e": "nx affected:e2e",
     "format": "nx format:write",
     "discovery:build:production": "NODE_ENV=production nx run discovery:build:production",
-    "hal:build:production": "nx run hal:build:production",
-    "hal:start": "npm run start apps/hal"
+    "hal:build:production": "nx run hal:build:production"
   },
   "private": true,
   "devDependencies": {

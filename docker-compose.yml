@@ -1,0 +1,35 @@
+version: '3.7'
+services:
+  hal:
+    container_name: hal
+    image: hal
+    hostname: hal
+    build:
+      context: .
+      dockerfile: hal.Dockerfile
+      # target: development
+    volumes:
+       - ./apps/hal:/space-odyssey/apps/hal
+       - shared_node_modules:/space-odyssey/node_modules
+    ports:
+      - "4200:4200"
+  discovery:
+    container_name: discovery
+    image: discovery
+    hostname: discovery
+    build:
+      context: .
+      dockerfile: discovery.Dockerfile
+      # target: development
+    ports:
+    - "3333:3333"
+    volumes:
+      - ./apps/discovery:/space-odyssey/apps/discovery
+      - shared_node_modules:/space-odyssey/node_modules
+
+    # Remove after debugging
+    #    command: "-f /dev/null"
+    #    entrypoint: /usr/bin/tail
+    #    tty: true
+volumes:
+  shared_node_modules:
