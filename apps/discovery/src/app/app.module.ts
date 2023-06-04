@@ -1,22 +1,11 @@
 import { Module } from '@nestjs/common';
-
 import { AppController } from './app.controller';
-import { DevelopmentAppService } from './services/development.app.service';
 import { ConfigModule } from '@nestjs/config';
-import { configuration } from '../../config/configuration';
+import { appServiceProvider, configuration } from '../../config/configuration';
 import { HttpModule } from '@nestjs/axios';
-import { join } from 'path';
-import { ServeStaticModule } from '@nestjs/serve-static';
-import { ProductionAppService } from './services/production.app.service';
-import { AppService } from './services/app.service';
+import { MongooseModule } from '@nestjs/mongoose';
+import { UsageModule } from './usage/usage.module';
 
-const appServiceProvider = {
-  provide: AppService,
-  useClass:
-    process.env.NODE_ENV === 'production'
-      ? ProductionAppService
-      : DevelopmentAppService,
-};
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -24,10 +13,13 @@ const appServiceProvider = {
       load: [configuration],
       isGlobal: true
     }),
+    // Serving static data. Not needed for local imports.
+    // ServeStaticModule.forRoot({
+    //   rootPath: join(__dirname, 'assets'),
+    // }),
+    MongooseModule.forRoot('mongodb://root:password@mongodb:27017/billing'),
     HttpModule,
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, 'assets'),
-    }),
+    UsageModule
   ],
   controllers: [AppController],
   providers: [appServiceProvider],

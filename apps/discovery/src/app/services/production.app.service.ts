@@ -2,10 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Configuration, OpenAIApi } from 'openai';
 import { Prompt, PromptType } from '@space-odyssey/eva';
+import MOCKED_RESPONSE from '../../assets/completion.json';
+import { UsageService } from '../usage/usage.service';
 
 @Injectable()
 export class ProductionAppService extends AppService {
-  constructor() {
+  constructor(private usageService: UsageService) {
     super();
     this.logger.verbose('ProductionAppService');
   }
@@ -26,8 +28,11 @@ export class ProductionAppService extends AppService {
 
     // Check response.status / response.statusText.
     // Maybe store response.config.data for logging purposes.
-    // Store response.data.usage for billing purposes
+
     console.log(response.data)
+
+    // Storing usage in MongoDB for billing purposes
+    await this.usageService.save(response.data.usage);
 
     const responseText = response.data.choices[0].text;
 

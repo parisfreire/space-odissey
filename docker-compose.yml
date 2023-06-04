@@ -13,6 +13,8 @@ services:
        - shared_node_modules:/space-odyssey/node_modules
     ports:
       - "4200:4200"
+    depends_on:
+      - discovery
   discovery:
     container_name: discovery
     image: discovery
@@ -26,10 +28,25 @@ services:
     volumes:
       - ./apps/discovery:/space-odyssey/apps/discovery
       - shared_node_modules:/space-odyssey/node_modules
-
+    depends_on:
+      - mongodb
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    hostname: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: billing
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodb:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro # RO: read-only
     # Remove after debugging
     #    command: "-f /dev/null"
     #    entrypoint: /usr/bin/tail
     #    tty: true
 volumes:
   shared_node_modules:
+  mongodb:

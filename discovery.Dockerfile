@@ -4,8 +4,6 @@ FROM node:latest
 
 WORKDIR /space-odyssey
 
-EXPOSE 4200
-
 COPY package.json .
 
 RUN npm install
@@ -19,9 +17,7 @@ COPY libs libs
 COPY apps/discovery apps/discovery
 # COPY ../../apps/discovery-e2e apps/discovery-e2e
 
-RUN npm install -g nx@15.8.6
-
-CMD nx serve discovery
+CMD node node_modules/.bin/nx serve discovery --verbose
 
 # DEPLOYMENT
 

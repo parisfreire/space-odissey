@@ -35,3 +35,16 @@ Visit the [Nx Documentation](https://nx.dev) to learn more.
 ✨SPACE ODISSEY - Monorepo✨
 
 `node node_modules/.bin/nx run-many --target=serve -p discovery,hal`
+
+
+
+# Mongo Shell
+
+Commands to run:
+
+1. `mongosh`
+2. `db.auth("root", "password");`
+3. `show dbs`
+4. `use $DB` - Replace $DB for any existing DB
+5. `show collections`
+6. `db.$COLLLECTION.find()` - Replace $COLLECTION for any existing collection

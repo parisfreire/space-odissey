@@ -4,11 +4,13 @@ import { ConfigService } from '@nestjs/config';
 import { HttpService } from '@nestjs/axios';
 import { AppService } from './app.service';
 import MOCKED_RESPONSE from '../../assets/completion.json'
+import { UsageService } from '../usage/usage.service';
 @Injectable()
 export class DevelopmentAppService extends AppService {
   constructor(
     private configService: ConfigService,
-    private httpService: HttpService) {
+    private httpService: HttpService,
+    private usageService: UsageService) {
       super();
       this.logger.verbose('DevelopmentAppService');
   }
@@ -27,7 +29,8 @@ export class DevelopmentAppService extends AppService {
     //   ),
     // );
 
-    console.log(MOCKED_RESPONSE.data.usage);
+    // Storing usage in MongoDB for billing purposes
+    await this.usageService.save(MOCKED_RESPONSE.data.usage);
 
     const responseText = MOCKED_RESPONSE.data.choices[0].text;
 
