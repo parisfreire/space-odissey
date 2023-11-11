@@ -1,12 +1,12 @@
 <section class="flex h-full min-h-[200px] w-full flex-col rounded-lg bg-white p-4 shadow">
 <!--  check max height-->
-  <div #conversation class="border-grey-800 h-full overflow-y-auto border-b-2">
+  <div #conversation class="border-grey-800 h-full overflow-y-auto border-b-2 max-h-[calc(100%-5rem)]">
     <p *ngFor="let prompt of prompts"
        [ngClass]="{
          'text-right': prompt.type === 'HUMAN',
          'text-left' : prompt.type === 'MACHINE'
          }"
-       class='my-2'
+       class='my-2 mx-4 break-words lg:break-normal'
     >
       {{ prompt.text }}
     </p>
@@ -21,8 +21,16 @@
           name="text"
           type="text"
           ngModel
-          class="w-full rounded-xl border border-gray-400 p-4
-          focus-visible:border-none focus-visible:outline-gray-800"
+          class="
+            w-full
+            rounded-xl
+            border
+            border-gray-400
+            p-4
+            pr-16
+            focus-visible:border-none
+            focus-visible:outline-gray-800
+          "
         />
         <button type="submit" class="absolute">
           <img
