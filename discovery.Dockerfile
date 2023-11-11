@@ -8,14 +8,11 @@ COPY package.json .
 
 RUN npm install
 
-# COPY ../.. .
-
 COPY nx.json .eslintrc.json jest.config.ts tsconfig.base.json ./
 
 COPY libs libs
 
 COPY apps/discovery apps/discovery
-# COPY ../../apps/discovery-e2e apps/discovery-e2e
 
 CMD node node_modules/.bin/nx serve discovery --verbose
 

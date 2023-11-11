@@ -17,18 +17,8 @@ export class DevelopmentAppService extends AppService {
 
   private readonly API_URL = this.configService.get<string>('API_URL');
 
+  // Local development mocked response free of charge
   async getResponsePrompt(prompt: Prompt): Promise<Prompt> {
-    // const { data: response } = await firstValueFrom(
-    //   this.httpService.get<AxiosResponse<CreateCompletionResponse>>(`${this.API_URL}/completion.json`).pipe(
-    //     catchError((error: AxiosError) => {
-    //       this.logger.error(error);
-    //       this.logger.error(error.response);
-    //       this.logger.error(error.response.statusText);
-    //       throw 'An error happened!';
-    //     }),
-    //   ),
-    // );
-
     // Storing usage in MongoDB for billing purposes
     await this.usageService.save(MOCKED_RESPONSE.data.usage);
 

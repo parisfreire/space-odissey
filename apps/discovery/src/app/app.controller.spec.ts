@@ -1,7 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { AppController } from './app.controller';
-import { AppService } from './services/development.app.service';
+import { AppService } from './services/app.service';
+import { Prompt, PromptType } from '@space-odyssey/eva';
 
 describe('AppController', () => {
   let app: TestingModule;
@@ -13,12 +14,19 @@ describe('AppController', () => {
     }).compile();
   });
 
-  describe('getData', () => {
-    it('should return "Welcome to discovery!"', () => {
+  describe('submitPrompt', () => {
+    it('should return a prompt response', () => {
+      const prompt: Prompt = {
+        id: 'id',
+        text: 'text',
+        type: PromptType.HUMAN
+      }
+
       const appController = app.get<AppController>(AppController);
-      expect(appController.getData()).toEqual(
-       'Welcome to discovery!',
-      );
+      expect(appController.submitPrompt(prompt)).toEqual({
+        ...prompt,
+        type: PromptType.MACHINE
+      });
     });
   });
 });

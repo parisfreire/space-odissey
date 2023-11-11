@@ -13,7 +13,6 @@ import { submitPrompt } from '../../state/prompts.actions';
   template: '<prompts-form (promptSubmit)="sendPrompt($event)" [prompts]="(prompts$ | async) || []"></prompts-form>',
   styles: [
     `
-      /*TODO: WHY HAVE TO INHERIT*/
       :host {
         height: inherit;
         width: inherit;

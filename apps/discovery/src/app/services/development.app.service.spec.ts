@@ -1,6 +1,7 @@
 import { Test } from '@nestjs/testing';
 
 import { DevelopmentAppService } from './development.app.service';
+import { Prompt, PromptType } from '@space-odyssey/eva';
 
 describe('AppService', () => {
   let service: DevelopmentAppService;
@@ -13,9 +14,17 @@ describe('AppService', () => {
     service = app.get<DevelopmentAppService>(DevelopmentAppService);
   });
 
-  describe('getData', () => {
-    it('should return "Welcome to discovery!"', () => {
-      expect(service.getData()).toEqual({ content: 'Welcome to discovery!' });
+  describe('getResponsePrompt', () => {
+    it('should return mocked prompt response', () => {
+      const prompt: Prompt = {
+        id: 'id',
+        text: 'text',
+        type: PromptType.HUMAN
+      }
+      expect(service.getResponsePrompt(prompt)).toEqual({
+        ...prompt,
+        type: PromptType.MACHINE
+      });
     });
   });
 });

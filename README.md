@@ -1,4 +1,56 @@
+
 # SpaceOdyssey
+
+A 2001: A Space Odyssey inspired _Nx monorepo_ using _Angular_ and _NestJS_ for querying _OpenAI Chat Completions API_, keeping track of tokens usage via _MongoDB_ for billing purposes.
+
+
+**EVA** library was created for sharing common models among the projects.
+**MOONBASE** library provides a generic way of client HTTP requests handling.
+
+Check **Understand this workspace** section for dependencies graph.
+
+## How to install
+
+`npm install`
+
+## How to run
+
+### Option 1 - Nx
+
+✨HAL - FE✨
+
+`node node_modules/.bin/nx serve hal`
+
+✨DISCOVERY - BE✨
+
+`node node_modules/.bin/nx serve discovery`
+
+✨SPACE ODISSEY - Monorepo✨
+
+`node node_modules/.bin/nx run-many --target=serve -p discovery,hal`
+
+### Option 2 - Docker
+
+`docker compose up`
+
+### Mongo Shell
+
+Commands to run:
+
+1. `mongosh`
+2. `db.auth("$USER", "$PASSWORD");`  - Check mongo-init.js for credentials
+3. `show dbs`
+4. `use $DB` - Replace $DB for any existing DB
+5. `show collections`
+6. `db.$COLLLECTION.find()` - Replace $COLLECTION for any existing collection
+
+### Production config
+
+1. Set NODE_ENV to `production`.
+
+2. Create `apps/discovery/config/env/production.env` file and set `OPENAI_API_KEY` to `"your-OPENAI-API-key"`
+
+## Nx Monorepo
 
 <a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
@@ -15,36 +67,3 @@ Run `npx nx connect-to-nx-cloud` to enable [remote caching](https://nx.app) and 
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
-
-
-
-# How to install
-
-`npm install`
-
-# How to run
-
-✨HAL - FE✨
-
-`node node_modules/.bin/nx serve hal`
-
-✨DISCOVERY - BE✨
-
-`node node_modules/.bin/nx serve discovery`
-
-✨SPACE ODISSEY - Monorepo✨
-
-`node node_modules/.bin/nx run-many --target=serve -p discovery,hal`
-
-
-
-# Mongo Shell
-
-Commands to run:
-
-1. `mongosh`
-2. `db.auth("root", "password");`
-3. `show dbs`
-4. `use $DB` - Replace $DB for any existing DB
-5. `show collections`
-6. `db.$COLLLECTION.find()` - Replace $COLLECTION for any existing collection

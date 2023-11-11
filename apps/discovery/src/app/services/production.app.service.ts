@@ -11,7 +11,7 @@ export class ProductionAppService extends AppService {
     super();
     this.logger.verbose('ProductionAppService');
   }
-
+  // Production API call. This usage is against your OpenAI account and will charge consequently.
   async getResponsePrompt(prompt: Prompt) {
     const configuration = new Configuration({
       apiKey: process.env.OPENAI_API_KEY,
@@ -25,11 +25,6 @@ export class ProductionAppService extends AppService {
       frequency_penalty: 0,
       presence_penalty: 0,
     });
-
-    // Check response.status / response.statusText.
-    // Maybe store response.config.data for logging purposes.
-
-    console.log(response.data)
 
     // Storing usage in MongoDB for billing purposes
     await this.usageService.save(response.data.usage);

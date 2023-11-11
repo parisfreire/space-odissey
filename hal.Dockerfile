@@ -10,14 +10,11 @@ COPY package.json .
 
 RUN npm install
 
-# COPY ../.. .
-
 COPY nx.json .eslintrc.json jest.config.ts tsconfig.base.json ./
 
 COPY libs libs
 
 COPY apps/hal apps/hal
-# COPY ../../apps/hal-e2e apps/hal-e2e
 
 CMD node node_modules/.bin/nx serve hal --host 0.0.0.0 --disable-host-check --poll 2000 --verbose
 

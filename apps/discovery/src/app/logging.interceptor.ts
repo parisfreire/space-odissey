@@ -7,6 +7,7 @@ export class HttpLoggingInterceptor implements NestInterceptor {
 
   private readonly logger = new Logger(HttpLoggingInterceptor.name);
 
+  // HTTP request interceptor for debugging purposes
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const req = context.switchToHttp().getRequest();
     const { statusCode } = context.switchToHttp().getResponse();

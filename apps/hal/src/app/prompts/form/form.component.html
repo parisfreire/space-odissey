@@ -1,5 +1,4 @@
 <section class="flex h-full min-h-[200px] w-full flex-col rounded-lg bg-white p-4 shadow">
-<!--  check max height-->
   <div #conversation class="border-grey-800 h-full overflow-y-auto border-b-2 max-h-[calc(100%-5rem)]">
     <p *ngFor="let prompt of prompts"
        [ngClass]="{

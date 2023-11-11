@@ -22,6 +22,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   @ViewChild('profileDropdown') profileDropdown!: ElementRef;
   @ViewChild('mobileMenuButton') mobileMenuButton: ElementRef | undefined;
   @ViewChild('mobileMenu') mobileMenu: ElementRef | undefined;
+
   private _isMenuOpen: boolean = false;
   get isMenuOpen(): boolean {
     return this._isMenuOpen;
@@ -39,6 +40,7 @@ export class MenuComponent implements OnInit, OnDestroy {
       .subscribe((target) => this.documentClickListener(target));
   }
 
+  // Listening to clicks outside the menu, so we close it
   documentClickListener(target: any): void {
     const profileDropdownElem = this.profileDropdown.nativeElement;
     const mobileMenuElem = this.mobileMenu?.nativeElement;

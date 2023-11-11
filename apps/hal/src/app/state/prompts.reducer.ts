@@ -21,19 +21,12 @@ export const promptsAdapter: EntityAdapter<Prompt> =
 
 export const initialPromptsState: PromptsState = promptsAdapter.getInitialState(
   {
-    // TODO: set initial required properties
     loaded: false,
   },
 );
 
 const reducer = createReducer(
   initialPromptsState,
-  // on(PromptsActions.submitPrompt, (state, { prompt }) => ({
-  //   ...state,
-  //   loaded: false,
-  //   error: null,
-  //   conversation: [...state.conversation, prompt]
-  //  })),
   on(PromptsActions.submitPrompt, (state, { prompt }) =>
       promptsAdapter.addOne(prompt, state)
   ),
@@ -42,15 +35,6 @@ const reducer = createReducer(
       ...state,
       loaded: true
     })
-
-    // promptsAdapter.setAll(prompts, {
-    //   ...state,
-    //    loaded: true,
-    //    conversation: [
-    //      ...state.conversation,
-    //      { text: Date.now().toString(), type: PromptType.MACHINE }
-    //    ]
-    // })
   ),
   on(PromptsActions.submitPromptFailure, (state, { error }) => ({
     ...state,
